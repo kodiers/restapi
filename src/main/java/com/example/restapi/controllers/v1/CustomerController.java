@@ -3,11 +3,14 @@ package com.example.restapi.controllers.v1;
 import com.example.restapi.api.v1.model.CustomerDTO;
 import com.example.restapi.api.v1.model.CustomerListDTO;
 import com.example.restapi.services.CustomerService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@Api("Customer controller")
 @Controller
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
@@ -18,6 +21,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    @ApiOperation(value = "List of customers", notes = "Some notes")
     @GetMapping
     public ResponseEntity<CustomerListDTO> getAllCustomers() {
         return new ResponseEntity<>(new CustomerListDTO(customerService.getAllCustomers()), HttpStatus.OK);
